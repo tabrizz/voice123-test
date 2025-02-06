@@ -2,5 +2,5 @@
 
 ### Install dependencies
 
-### Run "pnpm run dev"
+### Run "pnpm run dev" to start the app
 
