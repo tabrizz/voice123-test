@@ -13,14 +13,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Avatar, CircularProgress, IconButton, Link, TablePagination } from '@mui/material';
-
-import { fetchVoiceActors } from '../requests/profiles';
-
-import '../index.css'
-import { usePlayAudio } from '../hooks/usePlayAudio';
 import { Pause } from '@mui/icons-material';
 import { PlayArrow } from '@mui/icons-material';
+import { Avatar, Box, CircularProgress, IconButton, Link, TablePagination } from '@mui/material';
+
+import { fetchVoiceActors } from '../requests/profiles';
+import { usePlayAudio } from '../hooks/usePlayAudio';
+import { HighlightedText } from '../components/HighlightedText';
+
+import '../index.css'
 
 export const Route = createFileRoute('/')({
   component: Index,
@@ -48,14 +49,16 @@ function Index() {
  
   return (
     <div className='container'>
-        <Stack spacing={5} direction="row">
+      <Box sx={{ flexGrow: 1, marginBottom: '2rem' }}>
+        <Stack spacing={2} direction="row">
           <TextField 
             id="standard-basic" 
-            label="Standard" 
+            label="Search for Voice Actors" 
             variant="standard" 
             size='small' 
             value={keywords}
             onChange={(e) => setKeywords(e.target.value)}
+            sx={{ width: '100%' }}
           />
           <Button 
             variant="contained" 
@@ -65,6 +68,7 @@ function Index() {
             Search
           </Button>
         </Stack>
+      </Box>
       <TableContainer component={Paper}>
         <TableContainer>
           <Table>
@@ -94,7 +98,9 @@ function Index() {
                   </TableCell>
                   <TableCell>
                     <Link href={`https://www.voice123.com/${item.user?.username}`} target='_blank'>
-                      {item.user?.username}
+                      <HighlightedText text={item.user?.username} highlight={searchTerm}>
+                        {item.user?.username}
+                      </HighlightedText>
                     </Link>
                   </TableCell>
                   <TableCell>{item.user?.name}</TableCell>
