@@ -1,4 +1,5 @@
 export const fetchVoiceActors = async ({ page, keywords }) => {
+  const URL = 'https://api.sandbox.voice123.com/providers/search/?'
   const headers = new Headers({
     "Content-Type": "text/json",
   })
@@ -6,7 +7,7 @@ export const fetchVoiceActors = async ({ page, keywords }) => {
   if (keywords) queryParams.append("keywords", keywords)
 
   const response = await fetch(
-    `https://api.sandbox.voice123.com/providers/search/?${queryParams.toString()}`,
+    `${URL}${queryParams.toString()}`,
     {
       headers,
     }
